@@ -2,7 +2,7 @@
 function Footer(){
     return(
         <footer>
-            <p>Katsuyou Japansese conjugation</p>
+            <footer>Katsuyou Japansese conjugation</footer>
         </footer>
     );
 }

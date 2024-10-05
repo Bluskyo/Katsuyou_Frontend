@@ -1,6 +1,7 @@
 import Header from './Header.jsx'
 import Footer from './Footer.jsx'
 import KanjiInfo from './KanjiInfo.jsx';
+import Center from './Center.jsx'
 
 import { useState } from 'react';
 
@@ -10,6 +11,7 @@ function App() {
   
   return(
     <>
+    <center>
     <Header/>
     <KanjiInfo/>
     <p>{guess}</p>
@@ -20,6 +22,8 @@ function App() {
       />
     </label>
     <Footer/>
+    </center>
+
     </>
   );
 }
