@@ -1,7 +1,24 @@
 import { useRef } from 'react'
+import  { useState } from 'react'
 
 function Settings(){
     const dialogRef = useRef(null);
+    //let kanji = "";
+
+    const [checkbox, setCheckbox] = useState({
+        affirmative : true,
+        negative: false,
+        formal: true,
+        informal: false, 
+        present: false,
+        past: true
+    })
+
+    const handleCheckboxChange = (event) => {
+        const { name, checked } = event.target;
+
+        setCheckbox((prevState) => ({...prevState, [name]: checked}));
+    };
 
     function openSettings() {
         if (!dialogRef.current){
@@ -11,16 +28,51 @@ function Settings(){
             ? dialogRef.current.close()
             : dialogRef.current.showModal();
     }
+
+    function applySettings() {
+        console.log(checkbox)
+
+        fetch('http://localhost:8080/settings', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+                //'kanji': kanji
+            },
+            body: JSON.stringify(checkbox),
+        })
+        .then(response => response.json())
+        .then(data => {
+            console.log('Success:', data);
+        })
+        .catch((error) => {
+            console.error('Error:', error);
+        });
+
+        dialogRef.current.close()
+    }
     
     return (
         <div>
             <button onClick={openSettings}>Settings</button>
             <dialog ref={dialogRef}>
-                <p>Test</p>
-                <form>
-                    <input type="checkbox" id="ID_FIELD" name="NAMEFIELD" value="VALUEFIELD" />
-                    <label htmlFor="ID_FIELD"> past form</label>
+                <p>Conjugation settings</p>
+                <form onSubmit={applySettings}>
+                    <input type="checkbox" id="AffirmativeID" name="affirmative" onChange = {handleCheckboxChange} defaultChecked/>
+                    <label htmlFor="AffirmativeID"> Affirmative </label>
+                    <input type="checkbox" id="NegativeID" name="negative" onChange = {handleCheckboxChange}/>
+                    <label htmlFor="NegativeID"> Negative </label><br/>
+
+                    <input type="checkbox" id="FormalID" name="formal" onChange = {handleCheckboxChange} defaultChecked/>
+                    <label htmlFor="FormalID"> Formal </label>
+                    <input type="checkbox" id="InformalID" name="informal" onChange = {handleCheckboxChange}/>
+                    <label htmlFor="InformalID"> Informal </label><br/>
+
+                    <input type="checkbox" id="presentID" name="present" onChange = {handleCheckboxChange}/>
+                    <label htmlFor="presentID"> Present </label><br/>
+                    <input type="checkbox" id="pastID" name="past"onChange = {handleCheckboxChange} defaultChecked/>
+                    <label htmlFor="pastID"> Past </label><br/>
                 </form>
+                <button type="submit" onClick={applySettings}> Apply </button>
             </dialog>
         </div>
     );

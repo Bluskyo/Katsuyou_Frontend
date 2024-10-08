@@ -18,8 +18,10 @@ function KanjiInfo() {
   return (
     <div>
       <h2>
-      <strong>{data.kanji}</strong>
+      {data.hiragana}<br/>
+      {data.kanji}<br/>
       </h2>
+      <h3>{data.meaning}</h3>     
     </div>
   );
 }
