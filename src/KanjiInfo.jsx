@@ -1,25 +1,16 @@
-import { useEffect, useState } from 'react';
-
+import React, { useContext } from 'react';
+import { KanjiContext } from './KanjiProvider';
 
 function KanjiInfo() {
-  const [data, setData] = useState([]);
+  const data = useContext(KanjiContext);
 
-  useEffect(() => {
-    const fetchData = async () => {
-      const response = await fetch('http://localhost:8080/random');
-      const responseJson = await response.json();
-      console.log(responseJson)
-      setData(responseJson)
-    };
-
-    fetchData();
-  }, []);
+  if (!data) return <div>Loading...</div>;
 
   return (
     <div>
       <h2>
-      {data.hiragana}<br/>
-      {data.kanji}<br/>
+        {data.hiragana}<br />
+        {data.kanji}<br />
       </h2>
       <h3>{data.meaning}</h3>     
     </div>

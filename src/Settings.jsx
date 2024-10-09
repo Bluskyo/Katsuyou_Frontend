@@ -1,9 +1,10 @@
-import { useRef } from 'react'
-import  { useState } from 'react'
+import { useRef, useState, useContext  } from 'react';
+import { KanjiContext } from './KanjiProvider';
+
 
 function Settings(){
     const dialogRef = useRef(null);
-    //let kanji = "";
+    const data = useContext(KanjiContext);
 
     const [checkbox, setCheckbox] = useState({
         affirmative : true,
@@ -31,16 +32,17 @@ function Settings(){
 
     function applySettings() {
         console.log(checkbox)
+        const encodedKanji = encodeURIComponent(data.kanji);
 
         fetch('http://localhost:8080/settings', {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
-                //'kanji': kanji
+                'kanji': encodedKanji
             },
             body: JSON.stringify(checkbox),
         })
-        .then(response => response.json())
+        .then(response => response.text())
         .then(data => {
             console.log('Success:', data);
         })
