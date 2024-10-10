@@ -33,16 +33,18 @@ function Settings(){
     function applySettings() {
         console.log(checkbox)
         const encodedKanji = encodeURIComponent(data.kanji);
+        const encodedTag = encodeURIComponent(data.tag);
 
         fetch('http://localhost:8080/settings', {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
+                'tag': encodedTag,
                 'kanji': encodedKanji
             },
             body: JSON.stringify(checkbox),
         })
-        .then(response => response.text())
+        .then(response => response.json())
         .then(data => {
             console.log('Success:', data);
         })
