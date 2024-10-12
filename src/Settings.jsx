@@ -1,18 +1,19 @@
-import { useRef, useState, useContext  } from 'react';
-import { KanjiContext } from './KanjiProvider';
+import { useRef, useState } from 'react';
 
+import getConjugation from './methods/getConjugations';
 
-function Settings(){
+function Settings(props){
     const dialogRef = useRef(null);
-    const data = useContext(KanjiContext);
+    const data = props.kanjiData;
+    const setConjugationData = props.setConjugationData;
 
     const [checkbox, setCheckbox] = useState({
         affirmative : true,
         negative: false,
         formal: true,
         informal: false, 
-        present: false,
-        past: true
+        present: true,
+        past: false
     })
 
     const handleCheckboxChange = (event) => {
@@ -31,30 +32,10 @@ function Settings(){
     }
 
     function applySettings() {
-        console.log(checkbox)
-        const encodedKanji = encodeURIComponent(data.kanji);
-        const encodedTag = encodeURIComponent(data.tag);
-
-        fetch('http://localhost:8080/settings', {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json',
-                'tag': encodedTag,
-                'kanji': encodedKanji
-            },
-            body: JSON.stringify(checkbox),
-        })
-        .then(response => response.json())
-        .then(data => {
-            console.log('Success:', data);
-        })
-        .catch((error) => {
-            console.error('Error:', error);
-        });
-
+        getConjugation(data, setConjugationData, checkbox)
         dialogRef.current.close()
     }
-    
+
     return (
         <div>
             <button onClick={openSettings}>Settings</button>
@@ -71,9 +52,9 @@ function Settings(){
                     <input type="checkbox" id="InformalID" name="informal" onChange = {handleCheckboxChange}/>
                     <label htmlFor="InformalID"> Informal </label><br/>
 
-                    <input type="checkbox" id="presentID" name="present" onChange = {handleCheckboxChange}/>
+                    <input type="checkbox" id="presentID" name="present" onChange = {handleCheckboxChange} defaultChecked/>
                     <label htmlFor="presentID"> Present </label><br/>
-                    <input type="checkbox" id="pastID" name="past"onChange = {handleCheckboxChange} defaultChecked/>
+                    <input type="checkbox" id="pastID" name="past"onChange = {handleCheckboxChange}/>
                     <label htmlFor="pastID"> Past </label><br/>
                 </form>
                 <button type="submit" onClick={applySettings}> Apply </button>

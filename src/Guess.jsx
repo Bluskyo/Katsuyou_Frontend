@@ -1,12 +1,10 @@
-import { useState } from 'react';
 
-function Guess(){
-    const [guess, setGuess] = useState("")
+function Guess(props){
     return(
         <div>
-            <p>{guess}</p>
+            <p>{props.guessInput}</p>
             <label>
-            <input placeholder="Type your guess" onChange={e => setGuess(e.target.value)}/>
+            <input placeholder="Type your guess" onChange={e => props.setGuess(e.target.value)}/>
             </label>
         </div>
     );

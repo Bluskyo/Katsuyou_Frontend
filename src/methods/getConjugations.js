@@ -9,8 +9,10 @@ var defaultSettings = {
     past: false
 }
 
-export function getConjugation(data, settings = defaultSettings) {
+export function getConjugation(data, setData, settings = defaultSettings) {
+
     console.log(settings);
+    
     const encodedKanji = encodeURIComponent(data.kanji);
     const encodedTag = encodeURIComponent(data.tag);
 
@@ -33,6 +35,7 @@ export function getConjugation(data, settings = defaultSettings) {
         console.log('Success:', data);
         return data;
     })
+    .then(data => setData(data))
     .catch((error) => {
         console.error('Error:', error);
     });
