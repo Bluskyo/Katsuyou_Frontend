@@ -32,7 +32,6 @@ function Guess(props){
                 onChange={(e) => setGuess(e.target.value)}
                 />
                 </label>
-                <button type="submit" > submit </button>
             </form>
         </div>
     );

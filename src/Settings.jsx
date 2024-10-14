@@ -7,13 +7,23 @@ function Settings(props){
     const data = props.kanjiData;
     const setConjugationData = props.setConjugationData;
 
+    // Default State when loading in page.
     const [checkbox, setCheckbox] = useState({
         affirmative : true,
         negative: false,
-        formal: true,
-        informal: false, 
-        present: true,
-        past: false
+        formal: false,
+        informal: true, 
+        present: false,
+        past: true,
+        teForm: false,
+        potential: false,
+        volitional: false,
+        passive: false,
+        causative: false,
+        causativePassive: false,
+        imperative: false,
+        conditional: false,
+
     })
 
     const handleCheckboxChange = (event) => {
@@ -42,20 +52,54 @@ function Settings(props){
             <dialog ref={dialogRef}>
                 <p>Conjugation Settings</p>
                 <form onSubmit={applySettings}>
+                    <p>Assertion</p>
                     <input type="checkbox" id="AffirmativeID" name="affirmative" onChange = {handleCheckboxChange} defaultChecked/>
                     <label htmlFor="AffirmativeID"> Affirmative </label>
+
                     <input type="checkbox" id="NegativeID" name="negative" onChange = {handleCheckboxChange}/>
                     <label htmlFor="NegativeID"> Negative </label><br/>
 
-                    <input type="checkbox" id="FormalID" name="formal" onChange = {handleCheckboxChange} defaultChecked/>
+                    <p>Formality</p>
+
+                    <input type="checkbox" id="FormalID" name="formal" onChange = {handleCheckboxChange} />
                     <label htmlFor="FormalID"> Formal </label>
-                    <input type="checkbox" id="InformalID" name="informal" onChange = {handleCheckboxChange}/>
+
+                    <input type="checkbox" id="InformalID" name="informal" onChange = {handleCheckboxChange} defaultChecked/>
                     <label htmlFor="InformalID"> Informal </label><br/>
 
-                    <input type="checkbox" id="presentID" name="present" onChange = {handleCheckboxChange} defaultChecked/>
-                    <label htmlFor="presentID"> Present </label><br/>
-                    <input type="checkbox" id="pastID" name="past"onChange = {handleCheckboxChange}/>
-                    <label htmlFor="pastID"> Past </label><br/>
+                    <p>Tenses</p>
+
+                    <input type="checkbox" id="presentID" name="present" onChange = {handleCheckboxChange}/>
+                    <label htmlFor="presentID"> Present </label>
+
+                    <input type="checkbox" id="pastID" name="past"onChange = {handleCheckboxChange} defaultChecked/>
+                    <label htmlFor="pastID"> Past </label>
+
+                    <input type="checkbox" id="teFormID" name="teForm"onChange = {handleCheckboxChange}/>
+                    <label htmlFor="teFormID"> Te-Form </label><br/>
+
+                    <input type="checkbox" id="potentialID" name="potential"onChange = {handleCheckboxChange}/>
+                    <label htmlFor="potentialID"> Potential </label>
+
+                    <input type="checkbox" id="volitionalID" name="volitional"onChange = {handleCheckboxChange}/>
+                    <label htmlFor="volitionalID"> Volitional </label>
+
+                    <input type="checkbox" id="passiveID" name="passive"onChange = {handleCheckboxChange}/>
+                    <label htmlFor="passiveID"> Passive </label><br/>
+
+                    <input type="checkbox" id="causativeID" name="causative"onChange = {handleCheckboxChange}/>
+                    <label htmlFor="causativeID"> Causative </label>
+
+                    <input type="checkbox" id="causativePassiveID" name="causativePassive"onChange = {handleCheckboxChange}/>
+                    <label htmlFor="causativePassiveID"> Causative Passive </label>
+
+                    <input type="checkbox" id="imperativeID" name="imperative"onChange = {handleCheckboxChange}/>
+                    <label htmlFor="imperativeID"> Imperative </label><br/>
+
+                    <input type="checkbox" id="conditionalID" name="conditional"onChange = {handleCheckboxChange}/>
+                    <label htmlFor="conditionalID"> Conditional (ば) </label>
+
+
                 </form> 
                 <button type="submit" onClick={applySettings}> Apply </button>
             </dialog>

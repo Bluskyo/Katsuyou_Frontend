@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+
 import KanjiInfo from './KanjiInfo.jsx';
 import Settings from './Settings.jsx';
 import Guess from './Guess.jsx';
