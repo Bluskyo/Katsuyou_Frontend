@@ -40,7 +40,7 @@ function Settings(props){
         <div>
             <button onClick={openSettings}>Settings</button>
             <dialog ref={dialogRef}>
-                <p>Conjugation settings</p>
+                <p>Conjugation Settings</p>
                 <form onSubmit={applySettings}>
                     <input type="checkbox" id="AffirmativeID" name="affirmative" onChange = {handleCheckboxChange} defaultChecked/>
                     <label htmlFor="AffirmativeID"> Affirmative </label>
@@ -56,7 +56,7 @@ function Settings(props){
                     <label htmlFor="presentID"> Present </label><br/>
                     <input type="checkbox" id="pastID" name="past"onChange = {handleCheckboxChange}/>
                     <label htmlFor="pastID"> Past </label><br/>
-                </form>
+                </form> 
                 <button type="submit" onClick={applySettings}> Apply </button>
             </dialog>
         </div>

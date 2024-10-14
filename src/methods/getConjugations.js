@@ -11,7 +11,7 @@ var defaultSettings = {
 
 export function getConjugation(data, setData, settings = defaultSettings) {
 
-    console.log(settings);
+    // console.log(settings);
     
     const encodedKanji = encodeURIComponent(data.kanji);
     const encodedTag = encodeURIComponent(data.tag);
@@ -32,7 +32,7 @@ export function getConjugation(data, setData, settings = defaultSettings) {
         return response.json();
     })
     .then(data => {
-        console.log('Success:', data);
+        // console.log('Success:', data);
         return data;
     })
     .then(data => setData(data))

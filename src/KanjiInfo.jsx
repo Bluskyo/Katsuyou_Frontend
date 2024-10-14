@@ -3,10 +3,10 @@ function KanjiInfo(props) {
 const data = props.kanjiData;
 const conjugationData = props.conjugationData;
 
-  if (!data) return <div>Loading...</div>;
-  if (!conjugationData) return <div>Loading...</div>;
+  if (!data || !conjugationData) return <div>Loading...</div>;
 
-  console.log("Data in kanjiInfo: ", conjugationData)
+  // console.log("Data in kanjiInfo: ", conjugationData)
+
   return (
     <div>
       <h2>

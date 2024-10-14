@@ -1,13 +1,41 @@
 
 function Guess(props){
+    
+    const guess = props.guess;
+    const setGuess = props.setGuess;
+    const setTriggerGuess = props.setTriggerGuess;
+    const conjugationData = props.conjugationData;
+
+    // test
+    const handleSubmit = (e) => {
+        e.preventDefault(); // Prevent page reload
+        checkAnswer(guess, conjugationData.conjugation); // Validate the guess
+    };
+
+    function checkAnswer(input, answer){
+        if (input == answer){
+        console.log("Correct! Next kanji!");
+        setTriggerGuess(guess);
+        } else{
+        console.log('Incorrect, try again!')}
+    };
+
+    console.log(guess);
+
     return(
         <div>
-            <p>{props.guessInput}</p>
+            <form onSubmit={handleSubmit}>
             <label>
-            <input placeholder="Type your guess" onChange={e => props.setGuess(e.target.value)}/>
-            </label>
+                <input 
+                name="userGuess" 
+                placeholder="Type your guess" 
+                onChange={(e) => setGuess(e.target.value)}
+                />
+                </label>
+                <button type="submit" > submit </button>
+            </form>
         </div>
     );
 }
 
-export default Guess
+export default Guess;
