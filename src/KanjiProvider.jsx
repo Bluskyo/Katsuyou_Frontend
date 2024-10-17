@@ -1,10 +1,13 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, createContext } from 'react';
 
 import KanjiInfo from './KanjiInfo.jsx';
 import Settings from './Settings.jsx';
 import Guess from './Guess.jsx';
 
 import getConjugation from './methods/getConjugations.js';
+
+// global context for settings.
+export const SettingsContext = createContext();
 
 export function KanjiProvider() {
   const [kanjiData, setKanjiData] = useState(null);
@@ -13,15 +16,31 @@ export function KanjiProvider() {
   const [guess, setGuess] = useState("");
   const [TriggerGuess, setTriggerGuess] = useState("");
 
+  // default settings
+  const [settings, setSettings] = useState({
+    affirmative : true,
+    negative: false,
+    formal: false,
+    informal: true, 
+    present: false,
+    past: true,
+    teForm: false,
+    potential: false,
+    volitional: false,
+    passive: false,
+    causative: false,
+    causativePassive: false,
+    imperative: false,
+    conditional: false,
+
+})
   useEffect(() => {
     const fetchData = async () => {
       const response = await fetch('http://localhost:8080/random');
       const responseJson = await response.json();
 
       setKanjiData(responseJson);
-      setConjugationData(getConjugation(responseJson, setConjugationData))
-
-      // console.log(responseJson)
+      setConjugationData(getConjugation(responseJson, setConjugationData, settings));
     };
 
     fetchData();
@@ -31,9 +50,11 @@ export function KanjiProvider() {
 
   return (
     <div>
-      <KanjiInfo kanjiData={kanjiData} conjugationData={conjugationData} setConjugationData={setConjugationData} />
+      <KanjiInfo kanjiData={kanjiData} conjugationData={conjugationData} setConjugationData={setConjugationData}/>
       <Guess guess={guess} setGuess={setGuess} setTriggerGuess={setTriggerGuess} conjugationData={conjugationData}/>
-      <Settings kanjiData={kanjiData} setConjugationData={setConjugationData}/>
+      <SettingsContext.Provider value={[settings, setSettings]}>
+        <Settings kanjiData={kanjiData} setConjugationData={setConjugationData}/>
+      </SettingsContext.Provider>
     </div>
   );
 }

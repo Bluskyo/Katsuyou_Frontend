@@ -1,4 +1,6 @@
-import { useRef, useState } from 'react';
+import { useRef, useContext } from 'react';
+import { SettingsContext } from './KanjiProvider';
+
 
 import getConjugation from './methods/getConjugations';
 
@@ -7,29 +9,12 @@ function Settings(props){
     const data = props.kanjiData;
     const setConjugationData = props.setConjugationData;
 
-    // Default State when loading in page.
-    const [checkbox, setCheckbox] = useState({
-        affirmative : true,
-        negative: false,
-        formal: false,
-        informal: true, 
-        present: false,
-        past: true,
-        teForm: false,
-        potential: false,
-        volitional: false,
-        passive: false,
-        causative: false,
-        causativePassive: false,
-        imperative: false,
-        conditional: false,
-
-    })
+    const [settings, setSettings] = useContext(SettingsContext);
 
     const handleCheckboxChange = (event) => {
         const { name, checked } = event.target;
 
-        setCheckbox((prevState) => ({...prevState, [name]: checked}));
+        setSettings((prevState) => ({...prevState, [name]: checked}));
     };
 
     function openSettings() {
@@ -42,7 +27,7 @@ function Settings(props){
     }
 
     function applySettings() {
-        getConjugation(data, setConjugationData, checkbox)
+        getConjugation(data, setConjugationData, settings)
         dialogRef.current.close()
     }
 

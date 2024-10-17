@@ -1,26 +1,5 @@
-// should be same as Settings's checkbox default.
 
-export var defaultSettings = {        
-    affirmative : true,
-    negative: false,
-    formal: false,
-    informal: true, 
-    present: false,
-    past: true,
-    teForm: false,
-    potential: false,
-    volitional: false,
-    passive: false,
-    causative: false,
-    causativePassive: false,
-    imperative: false,
-    conditional: false,
-    
-}
-
-export function getConjugation(data, setData, settings = defaultSettings) {
-
-    console.log(settings);
+export function getConjugation(data, setData, settings) {
     
     const encodedKanji = encodeURIComponent(data.kanji);
     const encodedTag = encodeURIComponent(data.tag);
@@ -41,7 +20,6 @@ export function getConjugation(data, setData, settings = defaultSettings) {
         return response.json();
     })
     .then(data => {
-        // console.log('Success:', data);
         return data;
     })
     .then(data => setData(data))
