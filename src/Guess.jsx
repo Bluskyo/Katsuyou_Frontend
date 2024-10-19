@@ -14,13 +14,13 @@ function Guess(props){
 
     function checkAnswer(input, answer){
         if (input == answer){
-        console.log("Correct! Next kanji!");
+        // console.log("Correct! Next kanji!");
         setTriggerGuess(guess);
         } else{
         console.log('Incorrect, try again!')}
     };
 
-    console.log(guess);
+    // console.log(guess);
 
     return(
         <div>

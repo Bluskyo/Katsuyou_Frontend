@@ -16,24 +16,24 @@ export function KanjiProvider() {
   const [guess, setGuess] = useState("");
   const [TriggerGuess, setTriggerGuess] = useState("");
 
-  // default settings
-  const [settings, setSettings] = useState({
-    affirmative : true,
-    negative: false,
-    formal: false,
-    informal: true, 
-    present: false,
-    past: true,
-    teForm: false,
-    potential: false,
-    volitional: false,
-    passive: false,
-    causative: false,
-    causativePassive: false,
-    imperative: false,
-    conditional: false,
+    // default settings
+    const [settings, setSettings] = useState({
+      affirmative : true,
+      negative: false,
+      formal: false,
+      informal: true, 
+      present: false,
+      past: true,
+      teForm: false,
+      potential: false,
+      volitional: false,
+      passive: false,
+      causative: false,
+      causativePassive: false,
+      imperative: false,
+      conditional: false,
+  })
 
-})
   useEffect(() => {
     const fetchData = async () => {
       const response = await fetch('http://localhost:8080/random');
