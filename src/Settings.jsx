@@ -23,19 +23,13 @@ function Settings(props){
     }, [settings.affirmative, settings.negative, settings.formal, settings.informal, 
         settings.present, settings.past, settings.teForm, settings.potential, settings.volitional,
         settings.passive, settings.causative, settings.causativePassive, settings.imperative, settings.conditional]);
+
+    function tenseCheck() {
+        // slice starts at index 4 to start at tense settings.
+        const tenses = Object.entries(settings).slice(4); 
     
-        function tenseCheck() {
-            // slice starts at index 4 to start at tense settings.
-            const tenses = Object.entries(settings).slice(4); 
-        
-            // Return true if all tenses are false.
-            return tenses.every(([, value]) => !value);
-        }
-
-    const handleCheckboxChange = (event) => {
-        const { name, checked } = event.target;
-
-        setSettings((prevState) => ({...prevState, [name]: checked}));
+        // Return true if all tenses are false.
+        return tenses.every(([, value]) => !value);
     }
 
     function formalityToggle(){
@@ -43,10 +37,9 @@ function Settings(props){
         // implement hiding of formality if only "twoConjugations" is checked.
 
         const tenses = Object.entries(settings).slice(4); 
-
-        console.log(tenses.every(([, value]) => !value))
         
-        if (tenses.every(([tense, value]) => value && twoConjugations.includes(tense))){
+        if (tenses.some(([tense, value]) => value && !twoConjugations.includes(tense)) 
+            || tenseCheck()){
             return (
                 <div>
                 <p>Formality</p>
@@ -57,14 +50,16 @@ function Settings(props){
                 <label htmlFor="InformalID"> Informal </label><br/>
                 </div>);
 
-        } else return;
-
-        // exept twoconjugation 
-        // any other option is true display formality
-        // if ()
-
-
+        } else return null;
     }
+
+    const handleCheckboxChange = (event) => {
+        const { name, checked } = event.target;
+
+        setSettings((prevState) => ({...prevState, [name]: checked}));
+    }
+
+
 
     function openSettings(){
         if (!dialogRef.current){
