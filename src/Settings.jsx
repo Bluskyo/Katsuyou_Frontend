@@ -19,24 +19,18 @@ function Settings(props){
             }
         else setPossibleSettings(false);
 
+        // deps determines where the useEffect should trigger.
     }, [settings.affirmative, settings.negative, settings.formal, settings.informal, 
         settings.present, settings.past, settings.teForm, settings.potential, settings.volitional,
         settings.passive, settings.causative, settings.causativePassive, settings.imperative, settings.conditional]);
     
-    function tenseCheck(){
-        const falseList = [];
-
-        // Gets only tenses by starting at 4.
-        for (let i = 4; i < Object.keys(settings).length; i++) {
-            let key = Object.keys(settings)[i];
-            let value = settings[key];
-
-            if (!value) falseList.push(key);
+        function tenseCheck() {
+            // slice starts at index 4 to start at tense settings.
+            const tenses = Object.entries(settings).slice(4); 
+        
+            // Return true if all tenses are false.
+            return tenses.every(([, value]) => !value);
         }
-
-        if (falseList.length == 10) return true;
-        else return false;
-    }
 
     const handleCheckboxChange = (event) => {
         const { name, checked } = event.target;
@@ -47,15 +41,29 @@ function Settings(props){
     function formalityToggle(){
         const twoConjugations = ["teForm", "volitional", "causativePassive", "imperative", "conditional"];
         // implement hiding of formality if only "twoConjugations" is checked.
-        return (
-        <div>
-        <p>Formality</p>
-        <input type="checkbox" id="FormalID" name="formal" onChange = {handleCheckboxChange} />
-        <label htmlFor="FormalID"> Formal </label>
 
-        <input type="checkbox" id="InformalID" name="informal" onChange = {handleCheckboxChange} defaultChecked/>
-        <label htmlFor="InformalID"> Informal </label><br/>
-        </div>)
+        const tenses = Object.entries(settings).slice(4); 
+
+        console.log(tenses.every(([, value]) => !value))
+        
+        if (tenses.every(([tense, value]) => value && twoConjugations.includes(tense))){
+            return (
+                <div>
+                <p>Formality</p>
+                <input type="checkbox" id="FormalID" name="formal" onChange = {handleCheckboxChange} />
+                <label htmlFor="FormalID"> Formal </label>
+        
+                <input type="checkbox" id="InformalID" name="informal" onChange = {handleCheckboxChange} defaultChecked/>
+                <label htmlFor="InformalID"> Informal </label><br/>
+                </div>);
+
+        } else return;
+
+        // exept twoconjugation 
+        // any other option is true display formality
+        // if ()
+
+
     }
 
     function openSettings(){
