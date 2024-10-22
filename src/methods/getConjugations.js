@@ -4,7 +4,7 @@ export function getConjugation(data, setData, settings) {
     const encodedKanji = encodeURIComponent(data.kanji);
     const encodedTag = encodeURIComponent(data.tag);
 
-    return fetch('http://localhost:8080/settings', {
+    return fetch('http://localhost:8080/api/settings', {
         method: 'POST',
         headers: {
             'Content-Type': 'application/json',

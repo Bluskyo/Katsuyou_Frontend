@@ -36,7 +36,7 @@ export function KanjiProvider() {
 
   useEffect(() => {
     const fetchData = async () => {
-      const response = await fetch('http://localhost:8080/random');
+      const response = await fetch('http://localhost:8080/api/random');
       const responseJson = await response.json();
 
       setKanjiData(responseJson);

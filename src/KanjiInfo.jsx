@@ -10,10 +10,10 @@ const conjugationData = props.conjugationData;
   return (
     <div>
       <h2>
-        {data.hiragana}<br />
-        {data.kanji}<br />
+        {data.reading	}<br />
+        {data.entry	}<br />
       </h2>
-      <h3>{data.meaning}</h3>  
+      <h3>{data.gloss	}</h3>  
       <h3>{conjugationData.tense} {conjugationData.formality} {conjugationData.assertion}</h3>
     </div>
   );

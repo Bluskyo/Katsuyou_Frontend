@@ -59,8 +59,6 @@ function Settings(props){
         setSettings((prevState) => ({...prevState, [name]: checked}));
     }
 
-
-
     function openSettings(){
         if (!dialogRef.current){
             return;
