@@ -19,6 +19,8 @@ const conjugationData = props.conjugationData;
   // Limit gloss/meaning to only have 3 meanings.
   const shortendMeanings = data.gloss.split(", ").slice(0, 3).join(", ");
 
+  // if (conjugationData.tense)
+
   return (
     <div>
       <h2>

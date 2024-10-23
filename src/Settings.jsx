@@ -33,21 +33,39 @@ function Settings(props){
     }
 
     function formalityToggle(){
-        const twoConjugations = ["teForm", "volitional", "causativePassive", "imperative", "conditional"];
-        // implement hiding of formality if only "twoConjugations" is checked.
+        const twoConjugations = ["teForm", "causativePassive", "imperative", "conditional"];
 
         const tenses = Object.entries(settings).slice(4); 
         
-        if (tenses.some(([tense, value]) => value && !twoConjugations.includes(tense)) 
-            || tenseCheck()){
+        if (tenses.some(([tense, value]) => value && !twoConjugations.includes(tense) || tenseCheck())){
             return (
                 <div>
-                <p>Formality</p>
-                <input type="checkbox" id="FormalID" name="formal" onChange = {handleCheckboxChange} />
-                <label htmlFor="FormalID"> Formal </label>
-        
-                <input type="checkbox" id="InformalID" name="informal" onChange = {handleCheckboxChange} defaultChecked/>
-                <label htmlFor="InformalID"> Informal </label><br/>
+                    <p>Formality</p>
+                    <input type="checkbox" id="FormalID" name="formal" onChange = {handleCheckboxChange}/>
+                    <label htmlFor="FormalID"> Formal </label>
+            
+                    <input type="checkbox" id="InformalID" name="informal" onChange = {handleCheckboxChange} defaultChecked/>
+                    <label htmlFor="InformalID"> Informal </label><br/>
+                </div>);
+
+        } else return null;
+    }
+
+    function assertionToggle(){
+        // hides of assertion if only Volitional is chosen.
+
+        const tenses = Object.entries(settings).slice(4); 
+
+
+        if (tenses.some(([tense, value]) => value && "volitional" != tense || tenseCheck())){
+            return (
+                <div>
+                    <p>Assertion</p>
+                    <input type="checkbox" id="AffirmativeID" name="affirmative" onChange = {handleCheckboxChange} defaultChecked/>
+                    <label htmlFor="AffirmativeID"> Affirmative </label>
+
+                    <input type="checkbox" id="NegativeID" name="negative" onChange = {handleCheckboxChange}/>
+                    <label htmlFor="NegativeID"> Negative </label><br/>
                 </div>);
 
         } else return null;
@@ -82,12 +100,7 @@ function Settings(props){
             <dialog ref={dialogRef}>
                 <p>Conjugation Settings</p>
                 <form onSubmit={applySettings}>
-                    <p>Assertion</p>
-                    <input type="checkbox" id="AffirmativeID" name="affirmative" onChange = {handleCheckboxChange} defaultChecked/>
-                    <label htmlFor="AffirmativeID"> Affirmative </label>
-
-                    <input type="checkbox" id="NegativeID" name="negative" onChange = {handleCheckboxChange}/>
-                    <label htmlFor="NegativeID"> Negative </label><br/>
+                    {assertionToggle()}
 
                     {formalityToggle()}
 
