@@ -3,7 +3,9 @@ function Guess(props){
     
     const guess = props.guess;
     const setGuess = props.setGuess;
+
     const setTriggerGuess = props.setTriggerGuess;
+
     const conjugationData = props.conjugationData;
 
     // test
@@ -12,8 +14,8 @@ function Guess(props){
         checkAnswer(guess, conjugationData.conjugation); // Validate the guess
     };
 
-    function checkAnswer(input, answer){
-        if (input == answer){
+    function checkAnswer(input, answer, answerHiragana){
+        if (input == answer || input == answerHiragana){
         // console.log("Correct! Next kanji!");
         setTriggerGuess(guess);
         } else{

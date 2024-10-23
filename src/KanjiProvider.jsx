@@ -46,8 +46,6 @@ export function KanjiProvider() {
     fetchData();
   }, [TriggerGuess]);
 
-  
-
   return (
     <div>
       <KanjiInfo kanjiData={kanjiData} conjugationData={conjugationData} setConjugationData={setConjugationData}/>

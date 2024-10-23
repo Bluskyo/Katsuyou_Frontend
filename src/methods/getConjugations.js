@@ -1,15 +1,15 @@
 
 export function getConjugation(data, setData, settings) {
     
-    const encodedKanji = encodeURIComponent(data.kanji);
-    const encodedTag = encodeURIComponent(data.tag);
+    const encodedEntry = encodeURIComponent(data.entry);
+    const encodedPos = encodeURIComponent(data.pos);
 
     return fetch('http://localhost:8080/api/settings', {
         method: 'POST',
         headers: {
             'Content-Type': 'application/json',
-            'tag': encodedTag,
-            'kanji': encodedKanji
+            'pos': encodedPos,
+            'entry': encodedEntry
         },
         body: JSON.stringify(settings),
     })
