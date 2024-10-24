@@ -17,17 +17,41 @@ const conjugationData = props.conjugationData;
   }
 
   // Limit gloss/meaning to only have 3 meanings.
-  const shortendMeanings = data.gloss.split(", ").slice(0, 3).join(", ");
+  const shortendGloss = data.gloss.split(", ").slice(0, 3).join(", ");
+  // Incase of more readings chooses first one.
+  const onlyOneReading = data.reading.split(", ")[0];
 
-  // if (conjugationData.tense)
+  function furigana() {
+    let furiganaArray = [];
+    let furigana = "";
+
+    for (let i = 0; i < onlyOneReading.length; i++) {
+
+      if (onlyOneReading[i] != data.entry[i]) {
+        furigana += onlyOneReading[i];
+
+      } else if (onlyOneReading[i] == data.entry[i]){
+        if (furigana != "") {
+          furiganaArray.push(furigana);
+          furigana = "";
+        }
+
+      }
+    } 
+    if (furigana !== "") {
+      furiganaArray.push(furigana);
+    }
+
+    return furiganaArray
+  }
 
   return (
     <div>
       <h2>
-        {data.reading}<br/>
+        {furigana()}<br/>
         {data.entry}<br/>
       </h2>
-      <h3>{shortendMeanings}</h3>  
+      <h3>{shortendGloss}</h3>  
       <h3>{conjugationData.tense} {conjugationData.formality} {conjugationData.assertion}</h3>
       <p>{conjugationData.conjugation}</p>
     </div>
