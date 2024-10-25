@@ -1,3 +1,4 @@
+import { useState } from "react";
 
 function Guess(props){
     
@@ -8,31 +9,35 @@ function Guess(props){
 
     const conjugationData = props.conjugationData;
 
-    // test
+    const [showFlag, setShowFlag] = useState("");
+
     const handleSubmit = (e) => {
         e.preventDefault(); // Prevent page reload
         checkAnswer(guess, conjugationData.conjugation); // Validate the guess
     };
 
-    function checkAnswer(input, answer, answerHiragana){
-        if (input == answer || input == answerHiragana){
-        // console.log("Correct! Next kanji!");
-        setTriggerGuess(guess);
-        } else{
-        console.log('Incorrect, try again!')}
-    };
+    function checkAnswer(input, answer, answerHiragana) {
+        if (input == answer || input == answerHiragana) { 
+                setShowFlag("Correct!")
 
-    // console.log(guess);
+                setTimeout(() => {
+                    setTriggerGuess(guess);
+                    setShowFlag("");
+                }, 2000);
+            } 
+        else setShowFlag("Incorrect, try again!");
+    };
 
     return(
         <div>
+            <p>{showFlag}</p>
             <form onSubmit={handleSubmit}>
-            <label>
-                <input 
-                name="userGuess" 
-                placeholder="Type your guess" 
-                onChange={(e) => setGuess(e.target.value)}
-                />
+                <label>
+                    <input 
+                    name="userGuess" 
+                    placeholder="Type your guess" 
+                    onChange={(e) => setGuess(e.target.value)}
+                    />
                 </label>
             </form>
         </div>

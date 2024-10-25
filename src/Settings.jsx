@@ -10,7 +10,6 @@ function Settings(props){
     const [settings, setSettings] = useContext(SettingsContext);
     const [possibleSettings, setPossibleSettings] = useState(false);
 
-    const furiganaToggle = props.furiganaToggle;
     const setFuriganaToggle = props.setFuriganaToggle;
 
     // Gets the latest settings. Checks for combinations that cant be true.
@@ -74,17 +73,16 @@ function Settings(props){
 
         } else return null;
     }
+    
+    const furiganaToggleChange = (event) => {
+        setFuriganaToggle(event.target.checked);
+    }
 
     const handleCheckboxChange = (event) => {
         const { name, checked } = event.target;
 
         setSettings((prevState) => ({...prevState, [name]: checked}));
     }
-
-    const furiganaToggleChange = (event) => {
-        setFuriganaToggle(event.target.checked);
-    }
-
 
     function openSettings(){
         if (!dialogRef.current){
