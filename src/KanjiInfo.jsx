@@ -30,16 +30,18 @@ const conjugationData = props.conjugationData;
       if (onlyOneReading[i] != data.entry[i]) {
         furigana += onlyOneReading[i];
 
-      } else if (onlyOneReading[i] == data.entry[i]){
-        if (furigana != "") {
-          furiganaArray.push(furigana);
-          furigana = "";
-        }
-
+      } else if (onlyOneReading[i] == data.entry[i] && furigana !== ""){
+        furiganaArray.push(furigana);
+        furigana = "";
       }
     } 
+    
     if (furigana !== "") {
-      furiganaArray.push(furigana);
+      if (furigana.slice(-1) == onlyOneReading.slice(-1)){
+        furiganaArray.push(furigana.slice(0, -1));
+      } else {
+        furiganaArray.push(furigana);
+      }
     }
 
     return furiganaArray
