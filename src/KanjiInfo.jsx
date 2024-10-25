@@ -3,6 +3,8 @@ function KanjiInfo(props) {
 const data = props.kanjiData;
 const conjugationData = props.conjugationData;
 
+const furiganaToggle = props.furiganaToggle;
+
   if (!data || !conjugationData) {
     return (
       <div>
@@ -22,29 +24,32 @@ const conjugationData = props.conjugationData;
   const onlyOneReading = data.reading.split(", ")[0];
 
   function furigana() {
-    let furiganaArray = [];
-    let furigana = "";
-
-    for (let i = 0; i < onlyOneReading.length; i++) {
-
-      if (onlyOneReading[i] != data.entry[i]) {
-        furigana += onlyOneReading[i];
-
-      } else if (onlyOneReading[i] == data.entry[i] && furigana !== ""){
-        furiganaArray.push(furigana);
-        furigana = "";
-      }
-    } 
+    if (furiganaToggle)
+      {
+        let furiganaArray = [];
+        let furigana = "";
     
-    if (furigana !== "") {
-      if (furigana.slice(-1) == onlyOneReading.slice(-1)){
-        furiganaArray.push(furigana.slice(0, -1));
-      } else {
-        furiganaArray.push(furigana);
-      }
-    }
-
-    return furiganaArray
+        for (let i = 0; i < onlyOneReading.length; i++) {
+    
+          if (onlyOneReading[i] != data.entry[i]) {
+            furigana += onlyOneReading[i];
+    
+          } else if (onlyOneReading[i] == data.entry[i] && furigana !== ""){
+            furiganaArray.push(furigana);
+            furigana = "";
+          }
+        } 
+    
+        if (furigana !== "") {
+          if (furigana.slice(-1) == onlyOneReading.slice(-1)){
+            furiganaArray.push(furigana.slice(0, -1));
+          } else {
+            furiganaArray.push(furigana);
+          }
+        }
+    
+        return furiganaArray
+      } else return "";
   }
 
   return (

@@ -6,8 +6,12 @@ import getConjugation from './methods/getConjugations';
 
 function Settings(props){
     const dialogRef = useRef(null);
+
     const [settings, setSettings] = useContext(SettingsContext);
     const [possibleSettings, setPossibleSettings] = useState(false);
+
+    const furiganaToggle = props.furiganaToggle;
+    const setFuriganaToggle = props.setFuriganaToggle;
 
     // Gets the latest settings. Checks for combinations that cant be true.
     useEffect(() => {
@@ -77,6 +81,11 @@ function Settings(props){
         setSettings((prevState) => ({...prevState, [name]: checked}));
     }
 
+    const furiganaToggleChange = (event) => {
+        setFuriganaToggle(event.target.checked);
+    }
+
+
     function openSettings(){
         if (!dialogRef.current){
             return;
@@ -98,6 +107,10 @@ function Settings(props){
         <div>
             <button onClick={openSettings}>Settings</button>
             <dialog ref={dialogRef}>
+                <p>Appearence Settings</p>
+                <input type="checkbox" id="furiganaID" name="furigana" onChange = {furiganaToggleChange} defaultChecked/>
+                <label htmlFor="furiganaID"> Furigana </label>
+
                 <p>Conjugation Settings</p>
                 <form onSubmit={applySettings}>
                     {assertionToggle()}

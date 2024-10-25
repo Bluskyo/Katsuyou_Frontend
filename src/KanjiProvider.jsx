@@ -16,6 +16,8 @@ export function KanjiProvider() {
   const [guess, setGuess] = useState("");
   const [TriggerGuess, setTriggerGuess] = useState("");
 
+  const [furiganaToggle, setFuriganaToggle] = useState(true);
+
     // default settings
     const [settings, setSettings] = useState({
       affirmative : true,
@@ -48,10 +50,10 @@ export function KanjiProvider() {
 
   return (
     <div>
-      <KanjiInfo kanjiData={kanjiData} conjugationData={conjugationData} setConjugationData={setConjugationData}/>
+      <KanjiInfo kanjiData={kanjiData} conjugationData={conjugationData} setConjugationData={setConjugationData} furiganaToggle={furiganaToggle} setFuriganaToggle={setFuriganaToggle}/>
       <Guess guess={guess} setGuess={setGuess} setTriggerGuess={setTriggerGuess} conjugationData={conjugationData}/>
       <SettingsContext.Provider value={[settings, setSettings]}>
-        <Settings kanjiData={kanjiData} setConjugationData={setConjugationData}/>
+        <Settings kanjiData={kanjiData} setConjugationData={setConjugationData} furiganaToggle={furiganaToggle} setFuriganaToggle={setFuriganaToggle}/>
       </SettingsContext.Provider>
     </div>
   );
