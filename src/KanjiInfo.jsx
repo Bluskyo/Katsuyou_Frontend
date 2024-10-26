@@ -12,8 +12,8 @@ const furiganaToggle = props.furiganaToggle;
           Loading...<br/>
           Loading...<br/>
         </h2>
-          <h3>Loading...</h3>  
-          <h3>Loading...</h3>
+        <h3>Loading...</h3>  
+        <h3>Loading...</h3>
       </div>
     );
   }

@@ -15,8 +15,10 @@ export function KanjiProvider() {
 
   const [guess, setGuess] = useState("");
   const [TriggerGuess, setTriggerGuess] = useState("");
-
+  
   const [furiganaToggle, setFuriganaToggle] = useState(true);
+  const [streakToggle, setStreakToggle] = useState(true);
+  const [triesToggle, setTriesToggle] = useState(true);
 
     // default settings
     const [settings, setSettings] = useState({
@@ -50,10 +52,14 @@ export function KanjiProvider() {
 
   return (
     <div>
-      <KanjiInfo kanjiData={kanjiData} conjugationData={conjugationData} setConjugationData={setConjugationData} furiganaToggle={furiganaToggle} setFuriganaToggle={setFuriganaToggle}/>
-      <Guess guess={guess} setGuess={setGuess} setTriggerGuess={setTriggerGuess} conjugationData={conjugationData}/>
+      <KanjiInfo kanjiData={kanjiData} conjugationData={conjugationData} furiganaToggle={furiganaToggle}/>
+
+      <Guess guess={guess} setGuess={setGuess} setTriggerGuess={setTriggerGuess} conjugationData={conjugationData}
+      streakToggle={streakToggle} triesToggle={triesToggle}/>
+
       <SettingsContext.Provider value={[settings, setSettings]}>
-        <Settings kanjiData={kanjiData} setConjugationData={setConjugationData} furiganaToggle={furiganaToggle} setFuriganaToggle={setFuriganaToggle}/>
+        <Settings kanjiData={kanjiData} setConjugationData={setConjugationData} setFuriganaToggle={setFuriganaToggle}
+        setStreakToggle={setStreakToggle} setTriesToggle={setTriesToggle}/>
       </SettingsContext.Provider>
     </div>
   );

@@ -10,8 +10,6 @@ function Settings(props){
     const [settings, setSettings] = useContext(SettingsContext);
     const [possibleSettings, setPossibleSettings] = useState(false);
 
-    const setFuriganaToggle = props.setFuriganaToggle;
-
     // Gets the latest settings. Checks for combinations that cant be true.
     useEffect(() => {
 
@@ -74,10 +72,28 @@ function Settings(props){
         } else return null;
     }
     
-    const furiganaToggleChange = (event) => {
-        setFuriganaToggle(event.target.checked);
-    }
+    const handleToggleChange = (event) => {
+        const { name, checked } = event.target;
 
+        const setFuriganaToggle = props.setFuriganaToggle;
+        const setStreakToggle = props.setStreakToggle;
+        const setTriesToggle = props.setTriesToggle;
+
+        switch (name) {
+            case "furigana":
+                setFuriganaToggle(checked);
+                break;
+            case "tries":
+                setTriesToggle(checked);
+                break;
+            case "streak":
+                setStreakToggle(checked);
+                break;
+            default:
+                break;
+        }
+    };
+    
     const handleCheckboxChange = (event) => {
         const { name, checked } = event.target;
 
@@ -106,8 +122,13 @@ function Settings(props){
             <button onClick={openSettings}>Settings</button>
             <dialog ref={dialogRef}>
                 <p>Appearence Settings</p>
-                <input type="checkbox" id="furiganaID" name="furigana" onChange = {furiganaToggleChange} defaultChecked/>
-                <label htmlFor="furiganaID"> Furigana </label>
+                <input type="checkbox" id="furiganaID" name="furigana" onChange = {handleToggleChange} defaultChecked/>
+                <label htmlFor="furiganaID"> Furigana </label> <br/>
+
+                <input type="checkbox" id="streakID" name="streak" onChange = {handleToggleChange} defaultChecked/>
+                <label htmlFor="streakID"> Show Streak🔥 </label>
+                <input type="checkbox" id="triesID" name="tries" onChange = {handleToggleChange} defaultChecked/>
+                <label htmlFor="triesID"> Show Tries </label>
 
                 <p>Conjugation Settings</p>
                 <form onSubmit={applySettings}>
