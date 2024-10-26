@@ -1,6 +1,10 @@
 import { useRef, useContext, useState, useEffect } from 'react';
 import { SettingsContext } from './KanjiProvider';
 
+import CheckboxWithTooltip from './CheckboxWithTooltip';
+
+import './CheckboxWithTooltip.css';
+
 
 import getConjugation from './methods/getConjugations';
 
@@ -9,6 +13,9 @@ function Settings(props){
 
     const [settings, setSettings] = useContext(SettingsContext);
     const [possibleSettings, setPossibleSettings] = useState(false);
+
+    const [showTeFormTooltip, setShowTeFormTooltip] = useState(false);
+    // const [showPotentialTooltip, setShowPotentialTooltip] = useState(false);
 
     // Gets the latest settings. Checks for combinations that cant be true.
     useEffect(() => {
@@ -130,44 +137,73 @@ function Settings(props){
                 <input type="checkbox" id="triesID" name="tries" onChange = {handleToggleChange} defaultChecked/>
                 <label htmlFor="triesID"> Show Tries </label>
 
-                <p>Conjugation Settings</p>
-                <form onSubmit={applySettings}>
-                    {assertionToggle()}
+                <fieldset>
+                    <p>Conjugation Settings</p>
+                    <form onSubmit={applySettings}>
+                        {assertionToggle()}
 
-                    {formalityToggle()}
+                        {formalityToggle()}
 
-                    <p>Tenses</p>
-                    <input type="checkbox" id="presentID" name="present" onChange = {handleCheckboxChange}/>
-                    <label htmlFor="presentID"> Present </label>
+                        <p>Tenses</p>
+                            <input type="checkbox" id="presentID"  onChange = {handleCheckboxChange}/>
+                            <label htmlFor="presentID"> Present </label>
 
-                    <input type="checkbox" id="pastID" name="past" onChange = {handleCheckboxChange} defaultChecked/>
-                    <label htmlFor="pastID"> Past </label>
+                            <input type="checkbox" id="pastID" onChange = {handleCheckboxChange} defaultChecked/>
+                            <label htmlFor="pastID"> Past </label>
 
-                    <input type="checkbox" id="teFormID" name="teForm" onChange = {handleCheckboxChange}/>
-                    <label htmlFor="teFormID"> Te-Form </label><br/>
-
-                    <input type="checkbox" id="potentialID" name="potential" onChange = {handleCheckboxChange}/>
-                    <label htmlFor="potentialID"> Potential </label>
-
-                    <input type="checkbox" id="volitionalID" name="volitional" onChange = {handleCheckboxChange}/>
-                    <label htmlFor="volitionalID"> Volitional </label>
-
-                    <input type="checkbox" id="passiveID" name="passive" onChange = {handleCheckboxChange}/>
-                    <label htmlFor="passiveID"> Passive </label><br/>
-
-                    <input type="checkbox" id="causativeID" name="causative" onChange = {handleCheckboxChange}/>
-                    <label htmlFor="causativeID"> Causative </label>
-
-                    <input type="checkbox" id="causativePassiveID" name="causativePassive" onChange = {handleCheckboxChange}/>
-                    <label htmlFor="causativePassiveID"> Causative Passive </label>
-
-                    <input type="checkbox" id="imperativeID" name="imperative" onChange = {handleCheckboxChange}/>
-                    <label htmlFor="imperativeID"> Imperative </label><br/>
-
-                    <input type="checkbox" id="conditionalID" name="conditional" onChange = {handleCheckboxChange}/>
-                    <label htmlFor="conditionalID"> Conditional (ば) </label>
-                </form> 
+                            <CheckboxWithTooltip
+                                id="teFormID"
+                                label="Te-Form"
+                                tooltipText="To link actions, events and states."
+                                onChange={handleCheckboxChange}
+                            /> <br/>
+                            <CheckboxWithTooltip
+                                id="potentialID"
+                                label="Potential"
+                                tooltipText="The ability to able to do."
+                                onChange={handleCheckboxChange}
+                            />
+                            <CheckboxWithTooltip
+                                id="volitionalID"
+                                label="Volitional"
+                                tooltipText="Invitational Let's/Shall we?"
+                                onChange={handleCheckboxChange}
+                            />
+                            <CheckboxWithTooltip
+                                id="passiveID"
+                                label="Passive"
+                                tooltipText="Expresses that the verb is done to someone."
+                                onChange={handleCheckboxChange}
+                            /> <br/>
+                            <CheckboxWithTooltip
+                                id="causativeID"
+                                label="Causative"
+                                tooltipText="Expresses someone is forced to do the verb. "
+                                onChange={handleCheckboxChange}
+                            />
+                            <CheckboxWithTooltip
+                                id="causativePassiveID"
+                                label="Causative Passive"
+                                tooltipText="Expresses someone or something caused an action to occur."
+                                onChange={handleCheckboxChange}
+                            /> 
+                            <CheckboxWithTooltip
+                                id="imperativeID"
+                                label="Imperative"
+                                tooltipText="Expresses an order."
+                                onChange={handleCheckboxChange}
+                            /> <br/>
+                            <CheckboxWithTooltip
+                                id="conditionalID"
+                                label="Conditional (ば)"
+                                tooltipText="Similar to the meaning if/when"
+                                onChange={handleCheckboxChange}
+                            /> 
+                    </form> 
+                </fieldset>
                 <button type="submit" disabled={possibleSettings} onClick={applySettings}> Apply </button>
+
+
             </dialog>
         </div>
     );

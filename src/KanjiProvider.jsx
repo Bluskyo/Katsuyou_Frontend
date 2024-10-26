@@ -15,7 +15,7 @@ export function KanjiProvider() {
 
   const [guess, setGuess] = useState("");
   const [TriggerGuess, setTriggerGuess] = useState("");
-  
+
   const [furiganaToggle, setFuriganaToggle] = useState(true);
   const [streakToggle, setStreakToggle] = useState(true);
   const [triesToggle, setTriesToggle] = useState(true);
