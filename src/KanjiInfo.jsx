@@ -21,34 +21,47 @@ const furiganaToggle = props.furiganaToggle;
   // Limit gloss/meaning to only have 3 meanings.
   const shortendGloss = data.gloss.split(", ").slice(0, 3).join(", ");
   // Incase of more readings chooses first one.
-  const onlyOneReading = data.reading.split(", ")[0];
+  const reading = data.reading.split(", ")[0];
 
   function furigana() {
     if (furiganaToggle)
       {
         let furiganaArray = [];
         let furigana = "";
+
+        let currentKanji = 0;
     
-        for (let i = 0; i < onlyOneReading.length; i++) {
-    
-          if (onlyOneReading[i] != data.entry[i]) {
-            furigana += onlyOneReading[i];
-    
-          } else if (onlyOneReading[i] == data.entry[i] && furigana !== ""){
+        for (let i = 0; i < reading.length; i++) {
+
+          if (reading[i] != data.entry[currentKanji]) {
+            furigana += reading[i];  
+            
+            // checks if reading is same as next char, then goes to next char in kanji word.
+            if (reading[i + 1] == data.entry[currentKanji + 1]){
+              currentKanji += 1
+              furiganaArray.push(furigana);
+              furigana = "";
+            }
+              // pushes remaining readings.
+          } else if (reading[i] == data.entry[i] && furigana !== ""){
+            currentKanji += 1
             furiganaArray.push(furigana);
             furigana = "";
           }
         } 
     
+        // removes trailing ending.
         if (furigana !== "") {
-          if (furigana.slice(-1) == onlyOneReading.slice(-1)){
+          if (furigana.slice(-1) == reading.slice(-1)){
             furiganaArray.push(furigana.slice(0, -1));
           } else {
             furiganaArray.push(furigana);
           }
         }
+        console.log(furiganaArray)
     
         return furiganaArray
+
       } else return "";
   }
 
