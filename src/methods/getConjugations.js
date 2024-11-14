@@ -2,14 +2,16 @@
 export function getConjugation(data, setData, settings) {
     
     const encodedEntry = encodeURIComponent(data.entry);
+    const encodedReading = encodeURIComponent(data.reading);
     const encodedPos = encodeURIComponent(data.pos);
 
     return fetch('http://localhost:8080/api/settings', {
         method: 'POST',
         headers: {
             'Content-Type': 'application/json',
-            'pos': encodedPos,
-            'entry': encodedEntry
+            'entry': encodedEntry,
+            'reading': encodedReading,
+            'pos': encodedPos
         },
         body: JSON.stringify(settings),
     })

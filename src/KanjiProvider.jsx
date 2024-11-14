@@ -16,6 +16,7 @@ export function KanjiProvider() {
   const [guess, setGuess] = useState("");
   const [TriggerGuess, setTriggerGuess] = useState("");
 
+  // appearance settings
   const [furiganaToggle, setFuriganaToggle] = useState(true);
   const [streakToggle, setStreakToggle] = useState(true);
   const [triesToggle, setTriesToggle] = useState(true);
@@ -40,7 +41,7 @@ export function KanjiProvider() {
 
   useEffect(() => {
     const fetchData = async () => {
-      const response = await fetch('http://localhost:8080/api/来る');
+      const response = await fetch('http://localhost:8080/api/頑張る');
       const responseJson = await response.json();
 
       setKanjiData(responseJson);
@@ -55,7 +56,7 @@ export function KanjiProvider() {
       <KanjiInfo kanjiData={kanjiData} conjugationData={conjugationData} furiganaToggle={furiganaToggle}/>
 
       <Guess guess={guess} setGuess={setGuess} setTriggerGuess={setTriggerGuess} conjugationData={conjugationData}
-      streakToggle={streakToggle} triesToggle={triesToggle}/>
+      streakToggle={streakToggle} triesToggle={triesToggle} kanjiData={kanjiData}/>
 
       <SettingsContext.Provider value={[settings, setSettings]}>
         <Settings kanjiData={kanjiData} setConjugationData={setConjugationData} setFuriganaToggle={setFuriganaToggle}

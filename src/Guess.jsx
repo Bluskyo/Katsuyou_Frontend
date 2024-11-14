@@ -1,4 +1,6 @@
 import { useState } from "react";
+import { toHiragana } from 'wanakana';
+
 
 function Guess(props){
     
@@ -6,6 +8,7 @@ function Guess(props){
     const setGuess = props.setGuess;
     const setTriggerGuess = props.setTriggerGuess;
     const conjugationData = props.conjugationData;
+
     const triesToggle = props.triesToggle;
     const streakToggle = props.streakToggle;
 
@@ -16,11 +19,16 @@ function Guess(props){
 
     const handleSubmit = (e) => {
         e.preventDefault(); // Prevent page reload
-        checkAnswer(guess, conjugationData.conjugation); // Validate the guess
+
+        // Validate the guess for either romaji, hiragana or kanji.
+        checkAnswer(guess, conjugationData.conjugation, conjugationData.reading); 
     };
 
     function checkAnswer(input, answer, answerHiragana) {
-        if (input == answer || input == answerHiragana) { 
+        console.log(answer)
+        console.log(answerHiragana)
+        
+        if (input == answer || toHiragana(input) == answerHiragana) { 
                 setShowFlag("Correct!")
                 setTries(tries + 1 );
 
@@ -58,7 +66,7 @@ function Guess(props){
                 <label>
                     <input 
                     name="userGuess" 
-                    placeholder="Type your guess" 
+                    placeholder="Enter in Romaji, Kanji or Hiragana" 
                     onChange={(e) => setGuess(e.target.value)}
                     />
                 </label>

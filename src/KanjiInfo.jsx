@@ -1,4 +1,3 @@
-
 function KanjiInfo(props) {
 const data = props.kanjiData;
 const conjugationData = props.conjugationData;
@@ -58,7 +57,6 @@ const furiganaToggle = props.furiganaToggle;
             furiganaArray.push(furigana);
           }
         }
-        console.log(furiganaArray)
     
         return furiganaArray
 
@@ -74,6 +72,7 @@ const furiganaToggle = props.furiganaToggle;
       <h3>{shortendGloss}</h3>  
       <h3>{conjugationData.tense} {conjugationData.formality} {conjugationData.assertion}</h3>
       <p>{conjugationData.conjugation}</p>
+      <p>{conjugationData.reading}</p>
     </div>
   );
 }
