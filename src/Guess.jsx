@@ -25,13 +25,13 @@ function Guess(props){
     };
 
     function checkAnswer(input, answer, answerHiragana) {
-        console.log(answer)
-        console.log(answerHiragana)
-        
+
         if (input == answer || toHiragana(input) == answerHiragana) { 
                 setShowFlag("Correct!")
                 setTries(tries + 1 );
 
+                document.getElementById('userGuessId').value = ''
+                 
                 setTimeout(() => {
                     setTriggerGuess(guess);
                     setShowFlag("");
@@ -65,7 +65,8 @@ function Guess(props){
             <form onSubmit={handleSubmit}>
                 <label>
                     <input 
-                    name="userGuess" 
+                    name="userGuess"
+                    id="userGuessId" 
                     placeholder="Enter in Romaji, Kanji or Hiragana" 
                     onChange={(e) => setGuess(e.target.value)}
                     />
