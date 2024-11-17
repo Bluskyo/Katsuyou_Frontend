@@ -1,5 +1,11 @@
 export function getFurigana(kanji, reading) {
-  if (!kanji || !reading) return []; // Handle incomplete data
+  // Handle incomplete data or hiragna word.
+  if (!kanji || !reading) return []; 
+  if (kanji == reading) return (
+    <div>
+      <p> {kanji} </p>
+    </div>
+  )
   
   let furiganaArray = [];
   let kanjiArray = [];
@@ -30,8 +36,8 @@ export function getFurigana(kanji, reading) {
     // finds furigana
     if (charKanji !== charReading) {
       // if on last reading, exclude hiragana from furigana.
-      if (reading[i] === reading[reading.length -1]){
-          furiganaArray.push(furigana)
+      if (i == reading.length -1){
+        furiganaArray.push(furigana)
       } else {
           furigana += charReading;
           
@@ -60,7 +66,7 @@ export function getFurigana(kanji, reading) {
   if (currentWord) kanjiArray.push(currentWord);
   if (hiragana) hiraganaArray.push(hiragana); 
 
-  // tests:  足りる, 頑張る, 振り返る, 買う
+  // tests:  足りる, 頑張る, 振り返る, 買う, 歌う
   
     return (
       <div>
