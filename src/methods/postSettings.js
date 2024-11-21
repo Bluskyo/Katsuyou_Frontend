@@ -11,9 +11,9 @@ export async function postSettings(settings) {
         if (!response.ok) {
             throw new Error(`HTTP error! status: ${response.status}`);
         }
-        const data_1 = await response.json();
-        const data_2 = data_1;
-        return data_2;
+        const result = await response.json();
+        
+        return result;
     } catch (error) {
         console.error('Error:', error);
     }

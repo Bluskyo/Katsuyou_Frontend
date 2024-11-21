@@ -7,7 +7,7 @@ import getConjugation from './methods/getConjugations';
 function Settings(props){
     const dialogRef = useRef(null);
     const [settings, setSettings] = useContext(SettingsContext);
-    const [possibleSettings, setPossibleSettings] = useState(false);
+    const [validSettings, setValidSettings] = useState(false);
 
     // Gets the latest settings. Checks for combinations that cant be true.
     useEffect(() => {
@@ -15,9 +15,9 @@ function Settings(props){
         if (!settings.affirmative && !settings.negative
              || !settings.formal && !settings.informal 
              || tenseCheck()) {
-            setPossibleSettings(true);
+            setValidSettings(true);
             }
-        else setPossibleSettings(false);
+        else setValidSettings(false);
 
         // deps determines where the useEffect should trigger.
     }, [settings.affirmative, settings.negative, settings.formal, settings.informal, 
@@ -26,7 +26,7 @@ function Settings(props){
 
     function tenseCheck() {
         // slice starts at index 4 to start at tense settings.
-        const tenses = Object.entries(settings).slice(4); 
+        const tenses = Object.entries(settings).slice(9); 
     
         // Return true if all tenses are false.
         return tenses.every(([, value]) => !value);
@@ -35,7 +35,7 @@ function Settings(props){
     function formalityToggle(){
         const twoConjugations = ["teForm", "causativePassive", "imperative", "conditional"];
 
-        const tenses = Object.entries(settings).slice(4); 
+        const tenses = Object.entries(settings).slice(9); 
         
         if (tenses.some(([tense, value]) => value && !twoConjugations.includes(tense) || tenseCheck())){
             return (
@@ -54,7 +54,7 @@ function Settings(props){
     function assertionToggle(){
         // hides of assertion if only Volitional is chosen.
 
-        const tenses = Object.entries(settings).slice(4); 
+        const tenses = Object.entries(settings).slice(9); 
 
 
         if (tenses.some(([tense, value]) => value && "volitional" != tense || tenseCheck())){
@@ -71,12 +71,14 @@ function Settings(props){
         } else return null;
     }
 
+    // for conjugation settings.
     const handleCheckboxChange = (event) => {
         const { name, checked } = event.target;
 
         setSettings((prevState) => ({...prevState, [name]: checked}));
     }
 
+    // for appearennce settings.
     const handleToggleChange = (event) => {
         const { name, checked } = event.target;
 
@@ -99,7 +101,6 @@ function Settings(props){
         }
     };
     
-
     function openSettings(){
         if (!dialogRef.current){
             return;
@@ -122,13 +123,23 @@ function Settings(props){
             <button onClick={openSettings}>Settings</button>
             <dialog ref={dialogRef}>
                 <p>Appearence Settings</p>
-                <input type="checkbox" id="furiganaID" name="furigana" onChange = {handleToggleChange} defaultChecked/>
-                <label htmlFor="furiganaID"> Furigana </label> <br/>
 
                 <input type="checkbox" id="streakID" name="streak" onChange = {handleToggleChange} defaultChecked/>
                 <label htmlFor="streakID"> Show Streak🔥 </label>
                 <input type="checkbox" id="triesID" name="tries" onChange = {handleToggleChange} defaultChecked/>
                 <label htmlFor="triesID"> Show Tries </label>
+
+                <p>JLPT Levels</p>
+                <input type="checkbox" id="N5ID" name="N5" onChange = {handleCheckboxChange} defaultChecked/>
+                <label htmlFor="N5ID"> N5 </label> 
+                <input type="checkbox" id="N4ID" name="N4" onChange = {handleCheckboxChange}/>
+                <label htmlFor="N4ID"> N4 </label> 
+                <input type="checkbox" id="N3ID" name="N3" onChange = {handleCheckboxChange}/>
+                <label htmlFor="N3ID"> N3 </label> 
+                <input type="checkbox" id="N2ID" name="N2" onChange = {handleCheckboxChange}/>
+                <label htmlFor="N2ID"> N2 </label> 
+                <input type="checkbox" id="N1ID" name="N1" onChange = {handleCheckboxChange}/>
+                <label htmlFor="N1ID"> N1 </label> 
 
                 <p>Conjugation Settings</p>
                 <form onSubmit={applySettings}>
@@ -175,7 +186,7 @@ function Settings(props){
                     <label htmlFor="conditionalID" data-tooltip-id="conditional-tooltip" data-tooltip-content="Expresses a conditional statement. (meaning if/when)"> Conditional (ば) </label>
                     <Tooltip id="conditional-tooltip"/>
                 </form> 
-                <button type="submit" disabled={possibleSettings} onClick={applySettings}> Apply </button>
+                <button type="submit" disabled={validSettings} onClick={applySettings}> Apply </button>
             </dialog>
         </div>
     );

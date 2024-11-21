@@ -66,7 +66,7 @@ export function getFurigana(kanji, reading) {
   if (currentWord) kanjiArray.push(currentWord);
   if (hiragana) hiraganaArray.push(hiragana); 
 
-  // tests:  足りる, 頑張る, 振り返る, 買う, 歌う
+  // tests: 足りる, 頑張る, 振り返る, 買う, 歌う
   
     return (
       <div>
