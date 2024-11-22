@@ -69,6 +69,7 @@ function Guess(props){
                     id="userGuessId" 
                     placeholder="Enter in Romaji, Kanji or Hiragana" 
                     onChange={(e) => setGuess(e.target.value)}
+                    autoFocus
                     />
                 </label>
             </form>
