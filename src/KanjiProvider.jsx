@@ -45,22 +45,34 @@ export function KanjiProvider() {
     conditional: false
   })
 
-  // first post settings to backend.
-  postSettings(settings);
-
-  // then run a get, where the saved settings in backend should get right kanji levels.
   useEffect(() => {
+    const updateSettingsAndFetchData = async () => {
+      try {
+        // first makes sure post settings is sent to backend.
+        const result = await postSettings(settings);
 
-    const fetchData = async () => {
-      const response = await fetch('http://localhost:8080/api/random');
-      const responseJson = await response.json();
+        if (result) {
+          // fetched data once settings are posted.
+          const fetchData = async () => {
+              const response = await fetch('http://localhost:8080/api/random');
+              const responseJson = await response.json();
 
-      setKanjiData(responseJson); // Basic info about word.
-      getConjugation(responseJson, setConjugationData);
+              setKanjiData(responseJson); // Basic info about word.
+              getConjugation(responseJson, setConjugationData);
+          };
+          fetchData();
+        }
+
+      } catch (error){
+        console.log("Error in updateSettingsAndfetchData: ", error);
+      }
+      
+
     };
 
-    fetchData();
-  }, [TriggerGuess]);
+  updateSettingsAndFetchData();
+}, [TriggerGuess]); // settings and TriggerGuess as dependencies
+
 
   return (
     <div>
