@@ -15,7 +15,7 @@ export function KanjiProvider() {
   const [conjugationData, setConjugationData] = useState(null);
 
   const [guess, setGuess] = useState("");
-  const [TriggerGuess, setTriggerGuess] = useState("");
+  const [triggerUpdate, setTriggerUpdate] = useState("");
 
   // appearance settings
   const [furiganaToggle, setFuriganaToggle] = useState(true);
@@ -53,37 +53,33 @@ export function KanjiProvider() {
 
         if (result) {
           // fetched data once settings are posted.
-          const fetchData = async () => {
-              const response = await fetch('http://localhost:8080/api/random');
-              const responseJson = await response.json();
+          const response = await fetch('http://localhost:8080/api/random');
+          const responseJson = await response.json();
 
-              setKanjiData(responseJson); // Basic info about word.
-              getConjugation(responseJson, setConjugationData);
-          };
-          fetchData();
+          setKanjiData(responseJson); // Basic info about word.
+          getConjugation(responseJson, setConjugationData);
         }
 
       } catch (error){
         console.log("Error in updateSettingsAndfetchData: ", error);
       }
       
-
     };
 
   updateSettingsAndFetchData();
-}, [TriggerGuess]); // settings and TriggerGuess as dependencies
+}, [triggerUpdate]); // triggerUpdate for when applying new settings or correct word is guessed.
 
 
   return (
     <div>
       <KanjiInfo kanjiData={kanjiData} conjugationData={conjugationData} furiganaToggle={furiganaToggle}/>
 
-      <Guess guess={guess} setGuess={setGuess} setTriggerGuess={setTriggerGuess} conjugationData={conjugationData}
+      <Guess guess={guess} setGuess={setGuess} setTriggerUpdate={setTriggerUpdate} conjugationData={conjugationData}
       streakToggle={streakToggle} triesToggle={triesToggle} kanjiData={kanjiData}/>
 
       <SettingsContext.Provider value={[settings, setSettings]}>
         <Settings kanjiData={kanjiData} setConjugationData={setConjugationData} setFuriganaToggle={setFuriganaToggle}
-        setStreakToggle={setStreakToggle} setTriesToggle={setTriesToggle}/>
+        setStreakToggle={setStreakToggle} setTriesToggle={setTriesToggle} setTriggerUpdate={setTriggerUpdate}/>
       </SettingsContext.Provider>
     </div>
   );

@@ -2,14 +2,14 @@ import { useRef, useContext, useState, useEffect } from 'react';
 import { SettingsContext } from './KanjiProvider';
 import { Tooltip } from 'react-tooltip'
 
-import getConjugation from './methods/getConjugations';
-
 function Settings(props){
     const dialogRef = useRef(null);
     const [settings, setSettings] = useContext(SettingsContext);
     const [validSettings, setValidSettings] = useState(false);
 
-    // Gets the latest settings. Checks for combinations that cant be true.
+    const setTriggerUpdate = props.setTriggerUpdate;
+    
+    // Gets the latest settings. Checks for combinations that cant be true. // change from useEffect?
     useEffect(() => {
 
         if (!settings.affirmative && !settings.negative
@@ -25,6 +25,37 @@ function Settings(props){
         settings.present, settings.past, settings.teForm, settings.potential, settings.volitional,
         settings.passive, settings.causative, settings.causativePassive, settings.imperative, settings.conditional]);
 
+
+    // for conjugation settings.
+    const handleCheckboxChange = (event) => {
+        const { name, checked } = event.target;
+
+        setSettings((prevState) => ({...prevState, [name]: checked}));
+    }
+
+    // for appearennce settings.
+    const handleToggleChange = (event) => {
+        const { name, checked } = event.target;
+
+        const setFuriganaToggle = props.setFuriganaToggle;
+        const setStreakToggle = props.setStreakToggle;
+        const setTriesToggle = props.setTriesToggle;
+
+        switch (name) {
+            case "furigana":
+                setFuriganaToggle(checked);
+                break;
+            case "tries":
+                setTriesToggle(checked);
+                break;
+            case "streak":
+                setStreakToggle(checked);
+                break;
+            default:
+                break;
+        }
+    };
+
     function tenseCheck() {
         // slice starts at index 9 to start at tense settings.
         const tenses = Object.entries(settings).slice(9); 
@@ -34,10 +65,8 @@ function Settings(props){
     }
 
     function jlptCheck() {
-        // slice starts at index 9 to start at tense settings.
         const levels = Object.entries(settings).slice(0, 5); 
     
-        // Return true if all tenses are false.
         return levels.every(([, value]) => !value);
     }
 
@@ -80,36 +109,6 @@ function Settings(props){
         } else return null;
     }
 
-    // for conjugation settings.
-    const handleCheckboxChange = (event) => {
-        const { name, checked } = event.target;
-
-        setSettings((prevState) => ({...prevState, [name]: checked}));
-    }
-
-    // for appearennce settings.
-    const handleToggleChange = (event) => {
-        const { name, checked } = event.target;
-
-        const setFuriganaToggle = props.setFuriganaToggle;
-        const setStreakToggle = props.setStreakToggle;
-        const setTriesToggle = props.setTriesToggle;
-
-        switch (name) {
-            case "furigana":
-                setFuriganaToggle(checked);
-                break;
-            case "tries":
-                setTriesToggle(checked);
-                break;
-            case "streak":
-                setStreakToggle(checked);
-                break;
-            default:
-                break;
-        }
-    };
-    
     function openSettings(){
         if (!dialogRef.current){
             return;
@@ -120,12 +119,12 @@ function Settings(props){
     }
 
     function applySettings(){
-        const data = props.kanjiData;
-        const setConjugationData = props.setConjugationData;
 
-        getConjugation(data, setConjugationData)
+        setTriggerUpdate(prev => prev + 1);
+
         dialogRef.current.close()
     }
+
 
     return (
         <div>

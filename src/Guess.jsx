@@ -6,7 +6,7 @@ function Guess(props){
     
     const guess = props.guess;
     const setGuess = props.setGuess;
-    const setTriggerGuess = props.setTriggerGuess;
+    const setTriggerUpdate = props.setTriggerUpdate;
     const conjugationData = props.conjugationData;
 
     const triesToggle = props.triesToggle;
@@ -30,10 +30,11 @@ function Guess(props){
                 setShowFlag("Correct!")
                 setTries(tries + 1 );
 
+                // removes last typed guess.
                 document.getElementById('userGuessId').value = ''
                  
                 setTimeout(() => {
-                    setTriggerGuess(guess);
+                    setTriggerUpdate(prev => prev);
                     setShowFlag("");
                     setTries(0);
                     setStreak(streak + 1);
@@ -48,7 +49,7 @@ function Guess(props){
 
     function displayTries(){
         if (triesToggle) {
-            return <p>Tries: {tries}</p>
+            return <p>Tries✍️: {tries}</p>
         } else return "";
     }
 
@@ -67,7 +68,7 @@ function Guess(props){
                     <input 
                     name="userGuess"
                     id="userGuessId" 
-                    placeholder="Enter in Romaji, Kanji or Hiragana" 
+                    placeholder="Write in Kanji, Hiragana or Romaji" 
                     onChange={(e) => setGuess(e.target.value)}
                     autoFocus
                     />
