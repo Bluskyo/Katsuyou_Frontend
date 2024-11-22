@@ -14,22 +14,31 @@ function Settings(props){
 
         if (!settings.affirmative && !settings.negative
              || !settings.formal && !settings.informal 
-             || tenseCheck()) {
+             || tenseCheck() || jlptCheck()) {
             setValidSettings(true);
             }
         else setValidSettings(false);
 
         // deps determines where the useEffect should trigger.
-    }, [settings.affirmative, settings.negative, settings.formal, settings.informal, 
+    }, [settings.N1, settings.N2,settings.N3, settings.N4, settings.N5,
+         settings.affirmative, settings.negative, settings.formal, settings.informal, 
         settings.present, settings.past, settings.teForm, settings.potential, settings.volitional,
         settings.passive, settings.causative, settings.causativePassive, settings.imperative, settings.conditional]);
 
     function tenseCheck() {
-        // slice starts at index 4 to start at tense settings.
+        // slice starts at index 9 to start at tense settings.
         const tenses = Object.entries(settings).slice(9); 
     
         // Return true if all tenses are false.
         return tenses.every(([, value]) => !value);
+    }
+
+    function jlptCheck() {
+        // slice starts at index 9 to start at tense settings.
+        const levels = Object.entries(settings).slice(0, 5); 
+    
+        // Return true if all tenses are false.
+        return levels.every(([, value]) => !value);
     }
 
     function formalityToggle(){
@@ -40,7 +49,7 @@ function Settings(props){
         if (tenses.some(([tense, value]) => value && !twoConjugations.includes(tense) || tenseCheck())){
             return (
                 <div>
-                    <p>Formality</p>
+                    <p>Formal degree</p>
                     <input type="checkbox" id="FormalID" name="formal" onChange = {handleCheckboxChange}/>
                     <label htmlFor="FormalID"> Formal </label>
             
@@ -114,7 +123,7 @@ function Settings(props){
         const data = props.kanjiData;
         const setConjugationData = props.setConjugationData;
 
-        getConjugation(data, setConjugationData, settings)
+        getConjugation(data, setConjugationData)
         dialogRef.current.close()
     }
 
@@ -129,7 +138,9 @@ function Settings(props){
                 <input type="checkbox" id="triesID" name="tries" onChange = {handleToggleChange} defaultChecked/>
                 <label htmlFor="triesID"> Show Tries </label>
 
-                <p>JLPT Levels</p>
+                <p data-tooltip-id="JLPT" data-tooltip-content="Japanese-Language Proficiency Test">JLPT Levels</p>
+                <Tooltip id="JLPT"/>
+
                 <input type="checkbox" id="N5ID" name="N5" onChange = {handleCheckboxChange} defaultChecked/>
                 <label htmlFor="N5ID"> N5 </label> 
                 <input type="checkbox" id="N4ID" name="N4" onChange = {handleCheckboxChange}/>
