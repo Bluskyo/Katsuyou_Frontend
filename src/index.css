@@ -4,8 +4,8 @@
   font-weight: 400;
 
   color-scheme: light dark;
-  color: rgba(255, 255, 255, 0.87);
-  background-color: #242424;
+  color: rgba( 0, 0, 0, 0.87);
+  background-color: #ffffff;
 
   font-synthesis: none;
   text-rendering: optimizeLegibility;
@@ -15,7 +15,7 @@
 
 a {
   font-weight: 500;
-  color: #646cff;
+  color: rgba(255, 0, 0, 0.8);
   text-decoration: inherit;
 }
 
@@ -44,17 +44,28 @@ h2 {
 }
 
 input[type=text] {
-  width: 20%;
+  color: rgba(0, 0, 0, 1);
+  background-color: #ffffff;
+  font-size: 1em;
+  text-indent: 3px;
+  padding: 5px;
+  margin: 0.5em 1;
+  border: 2px solid #ccc;
+  border-radius: 20px;
+
+  outline: none;
+  transition: all 0.2s ease;
 }
 
-input[type=text]:focus{
-  width: 20%;
+input[type=text]:focus {
+  border-color: #ca0000;
+  box-shadow: 0 0 2px rgba( 55, 0, 0, 1); 
 }
 
 @media (max-width: 3840px) {
   input[type=text] {
-    width: 10em; 
-    min-width: 15em;
+    width: 12em; 
+    min-width: 15.3em;
   }
 }
 
@@ -66,6 +77,7 @@ p.word {
 p.translation {
   text-decoration-line: underline;
   text-decoration-style: dashed;
+  text-underline-offset: 6px;
   margin-top: 0em;
 }
 
@@ -79,6 +91,7 @@ p.stats-no-space {
 }
 
 .stats {
+  font-size: 1em;
   display: flex;
   justify-content: center;
   gap: 20px;

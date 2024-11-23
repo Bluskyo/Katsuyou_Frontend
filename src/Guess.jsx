@@ -33,7 +33,7 @@ function Guess(props){
                 document.getElementById('userGuessId').value = ''
                  
                 setTimeout(() => {
-                    setTriggerUpdate(prev => prev);
+                    setTriggerUpdate(prev => prev + 1);
                     setShowFlag("");
                     setTries(0);
                     setStreak(streak + 1);
