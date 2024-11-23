@@ -8,31 +8,26 @@ const conjugationData = props.conjugationData;
 if (!data || !conjugationData) {
   return (
     <div>
-      <h2>
-        Loading...<br/>
-        Loading...<br/>
-      </h2>
-      <h3>Loading...</h3>  
-      <h3>Loading...</h3>
+      <p className="word">Loading...</p>
+      <p className="translation">Loading...</p>  
+      <p className="conjugation-info">Loading...</p>
     </div>
   );
 }
 
   // Limit gloss/meaning to only have 3 meanings.
-  const shortendGloss = data.gloss.split(", ").slice(0, 3).join(", ");
+  const translation = data.gloss.split(", ").slice(0, 3).join(", ");
 
   // Incase of more readings chooses first one.
   const reading = data.reading.split(", ")[0];
 
-  const wordWithFurigana = getFurigana(data.entry, reading);
+  const word = getFurigana(data.entry, reading);
 
   return (
     <div>
-      <h2>{wordWithFurigana}</h2>
-      <h3>{shortendGloss}</h3>  
-      <h3>{conjugationData.tense} {conjugationData.formality} {conjugationData.assertion}</h3>
-      <p>{conjugationData.conjugation}</p>
-      <p>{conjugationData.reading}</p>
+      <p className="word">{word}</p>
+      <p className="translation">{translation}</p>  
+      <p className="conjugation-info">{conjugationData.tense} {conjugationData.formality} {conjugationData.assertion}</p>
     </div>
   );
 }

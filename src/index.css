@@ -23,12 +23,14 @@ body{
   min-height: 100vh;
   display: flex;
   flex-direction: column;
+  margin-top: 0px;
+  margin-bottom: 0px;
 }
 
 footer {
-  position: absolute;
+  position: fixed;
   width: 100%;
-  height: 2.5rem;   
+  height: 4.5rem;   
   bottom: 0;
 }
 
@@ -39,4 +41,30 @@ h1 {
 
 h2 {
   font-size: 2em;
+}
+
+p.word {
+  font-size: 2.5em;
+  margin-bottom: 0em;
+}
+
+p.translation {
+  text-decoration-line: underline;
+  text-decoration-style: dashed;
+  margin-top: 0em;
+}
+
+p.conjugation-info {
+  font-size: 1.4em;
+  margin-bottom: 0.5em;
+}
+
+p.stats-no-space {
+  margin-bottom: 0.5em;
+}
+
+.stats {
+  display: flex;
+  justify-content: center;
+  gap: 20px;
 }

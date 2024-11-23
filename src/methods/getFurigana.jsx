@@ -2,9 +2,9 @@ export function getFurigana(kanji, reading) {
   // Handle incomplete data or hiragna word.
   if (!kanji || !reading) return []; 
   if (kanji == reading) return (
-    <div>
-      <p> {kanji} </p>
-    </div>
+    <span>
+      <ruby>{kanji}</ruby>
+    </span>
   )
   
   let furiganaArray = [];
@@ -69,7 +69,7 @@ export function getFurigana(kanji, reading) {
   // tests: 足りる, 頑張る, 振り返る, 買う, 歌う
   
     return (
-      <div>
+      <span>
         {kanjiArray.map((kanji, index) => (
           <ruby key={index}>
             {kanjiArray[index]}
@@ -77,7 +77,7 @@ export function getFurigana(kanji, reading) {
             {hiraganaArray[index]}
           </ruby>
         ))}
-      </div>
+      </span>
     );
 
 }

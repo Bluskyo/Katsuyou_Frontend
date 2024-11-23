@@ -16,7 +16,6 @@ function Guess(props){
     const [tries, setTries] = useState(0);
     const [streak, setStreak] = useState(0);
 
-
     const handleSubmit = (e) => {
         e.preventDefault(); // Prevent page reload
 
@@ -47,22 +46,18 @@ function Guess(props){
         }
     };
 
-    function displayTries(){
-        if (triesToggle) {
-            return <p>Tries✍️: {tries}</p>
-        } else return "";
-    }
-
-    function displayStreak() {
-        if (streakToggle) {
-            return <p>Streak🔥: {streak}</p>
-        } else return "";
+    function DisplayStats() {
+        return (
+            <div className="stats">
+                {triesToggle && <p className="stats-no-space">Tries✍️: {tries}</p>}
+                {streakToggle && <p className="stats-no-space">Streak🔥: {streak}</p>}
+            </div>
+        );
     }
 
     return(
         <div>
-            <p>{showFlag}</p>
-            {displayTries()} {displayStreak()}
+            <DisplayStats />
             <form onSubmit={handleSubmit}>
                 <label>
                     <input 
@@ -74,6 +69,7 @@ function Guess(props){
                     />
                 </label>
             </form>
+            <p>{showFlag}</p>
         </div>
     );
 }

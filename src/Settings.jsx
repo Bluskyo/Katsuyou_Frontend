@@ -78,7 +78,7 @@ function Settings(props){
         if (tenses.some(([tense, value]) => value && !twoConjugations.includes(tense) || tenseCheck())){
             return (
                 <div>
-                    <p>Formal degree</p>
+                    <p>Formality</p>
                     <input type="checkbox" id="FormalID" name="formal" onChange = {handleCheckboxChange}/>
                     <label htmlFor="FormalID"> Formal </label>
             
@@ -135,7 +135,7 @@ function Settings(props){
                 <input type="checkbox" id="streakID" name="streak" onChange = {handleToggleChange} defaultChecked/>
                 <label htmlFor="streakID"> Show Streak🔥 </label>
                 <input type="checkbox" id="triesID" name="tries" onChange = {handleToggleChange} defaultChecked/>
-                <label htmlFor="triesID"> Show Tries </label>
+                <label htmlFor="triesID"> Show Tries✍️ </label>
 
                 <p data-tooltip-id="JLPT" data-tooltip-content="Japanese-Language Proficiency Test">JLPT Levels</p>
                 <Tooltip id="JLPT"/>
