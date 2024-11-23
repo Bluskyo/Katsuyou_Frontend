@@ -8,7 +8,12 @@ const conjugationData = props.conjugationData;
 if (!data || !conjugationData) {
   return (
     <div>
-      <p className="word">Loading...</p>
+      <p className="word">
+        <ruby>
+            Loading...
+            <rt>Loading</rt>
+          </ruby>
+      </p>
       <p className="translation">Loading...</p>  
       <p className="conjugation-info">Loading...</p>
     </div>
