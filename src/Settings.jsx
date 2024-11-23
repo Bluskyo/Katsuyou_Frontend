@@ -78,7 +78,7 @@ function Settings(props){
         if (tenses.some(([tense, value]) => value && !twoConjugations.includes(tense) || tenseCheck())){
             return (
                 <div>
-                    <p>Formality</p>
+                    <p className="settings">Formality</p>
                     <input type="checkbox" id="FormalID" name="formal" onChange = {handleCheckboxChange}/>
                     <label htmlFor="FormalID"> Formal </label>
             
@@ -98,7 +98,7 @@ function Settings(props){
         if (tenses.some(([tense, value]) => value && "volitional" != tense || tenseCheck())){
             return (
                 <div>
-                    <p>Assertion</p>
+                    <p className="settings">Assertion</p>
                     <input type="checkbox" id="AffirmativeID" name="affirmative" onChange = {handleCheckboxChange} defaultChecked/>
                     <label htmlFor="AffirmativeID"> Affirmative </label>
 
@@ -128,16 +128,16 @@ function Settings(props){
 
     return (
         <div>
-            <button onClick={openSettings}>Settings</button>
-            <dialog ref={dialogRef}>
-                <p>Appearence Settings</p>
+            <button className='settings-button' onClick={openSettings}>Settings</button>
+            <dialog className='settings-modal' ref={dialogRef}>
+                <p className="settings">Appearence✨</p>
 
                 <input type="checkbox" id="streakID" name="streak" onChange = {handleToggleChange} defaultChecked/>
                 <label htmlFor="streakID"> Show Streak🔥 </label>
                 <input type="checkbox" id="triesID" name="tries" onChange = {handleToggleChange} defaultChecked/>
                 <label htmlFor="triesID"> Show Tries✍️ </label>
 
-                <p data-tooltip-id="JLPT" data-tooltip-content="Japanese-Language Proficiency Test">JLPT Levels</p>
+                <p className="settings" data-tooltip-id="JLPT" data-tooltip-content="Japanese-Language Proficiency Test">JLPT Levels</p>
                 <Tooltip id="JLPT"/>
 
                 <input type="checkbox" id="N5ID" name="N5" onChange = {handleCheckboxChange} defaultChecked/>
@@ -151,13 +151,13 @@ function Settings(props){
                 <input type="checkbox" id="N1ID" name="N1" onChange = {handleCheckboxChange}/>
                 <label htmlFor="N1ID"> N1 </label> 
 
-                <p>Conjugation Settings</p>
+                <p className="settings">Conjugation Settings</p>
                 <form onSubmit={applySettings}>
                     {assertionToggle()}
 
                     {formalityToggle()}
 
-                    <p>Tenses</p>
+                    <p className="settings">Tenses</p>
                     <input type="checkbox" id="presentID" name="present" onChange = {handleCheckboxChange}/>
                     <label htmlFor="presentID"> Present </label>
 
@@ -196,7 +196,7 @@ function Settings(props){
                     <label htmlFor="conditionalID" data-tooltip-id="conditional-tooltip" data-tooltip-content="Expresses a conditional statement."> Conditional (ば) </label>
                     <Tooltip id="conditional-tooltip"/>
                 </form> 
-                <button type="submit" disabled={validSettings} onClick={applySettings}> Apply </button>
+                <button className='settings-button' type="submit" disabled={validSettings} onClick={applySettings}> Apply </button>
             </dialog>
         </div>
     );

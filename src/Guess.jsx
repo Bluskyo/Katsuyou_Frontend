@@ -12,7 +12,6 @@ function Guess(props){
     const triesToggle = props.triesToggle;
     const streakToggle = props.streakToggle;
 
-    const [showFlag, setShowFlag] = useState("");
     const [tries, setTries] = useState(0);
     const [streak, setStreak] = useState(0);
 
@@ -24,25 +23,28 @@ function Guess(props){
     };
 
     function checkAnswer(input, answer, answerHiragana) {
+        
+        const userGuessElement = document.getElementById('userGuessId');
 
         if (input == answer || toHiragana(input) == answerHiragana) { 
-                setShowFlag("Correct!")
                 setTries(tries + 1 );
-
                 // removes last typed guess.
                 document.getElementById('userGuessId').value = ''
                  
-                setTimeout(() => {
-                    setTriggerUpdate(prev => prev + 1);
-                    setShowFlag("");
-                    setTries(0);
-                    setStreak(streak + 1);
-                }, 2000);
+                setTriggerUpdate(prev => prev + 1);
+                setTries(0);
+                setStreak(streak + 1);
             } 
         else {
-            setShowFlag("Incorrect, try again!")
             setTries(tries + 1 );
             setStreak(0);
+            // adds and removes shake class to userguessID to achive shake effect.
+            userGuessElement.classList.add('shake');
+
+            setTimeout(() => {
+                userGuessElement.classList.remove('shake');
+            }, 500);
+
         }
     };
 
@@ -70,7 +72,6 @@ function Guess(props){
                     />
                 </label>
             </form>
-            <p>{showFlag}</p>
         </div>
     );
 }
