@@ -181,19 +181,19 @@ function Settings(props){
                     <Tooltip id="passive-tooltip"/>
 
                     <input type="checkbox" id="causativeID" name="causative" onChange = {handleCheckboxChange}/>
-                    <label htmlFor="causativeID" data-tooltip-id="causative-tooltip" data-tooltip-content="Expresses someone is forced to do the something."> Causative </label>
+                    <label htmlFor="causativeID" data-tooltip-id="causative-tooltip" data-tooltip-content="To be Forced to do the something."> Causative </label>
                     <Tooltip id="causative-tooltip"/>
 
                     <input type="checkbox" id="causativePassiveID" name="causativePassive" onChange = {handleCheckboxChange}/>
-                    <label htmlFor="causativePassiveID" data-tooltip-id="causativePassive-tooltip" data-tooltip-content="Expresses someone or something caused an action to occur."> Causative Passive </label>
-                    <Tooltip id="causativePassive-tooltip"/>
+                    <label htmlFor="causativePassiveID" data-tooltip-id="causativePassive-tooltip" data-tooltip-content="Causing an action to occur."> Causative Passive </label>
+                    <Tooltip id="causativePassive-tooltip"/><br/>
 
                     <input type="checkbox" id="imperativeID" name="imperative" onChange = {handleCheckboxChange}/>
-                    <label htmlFor="imperativeID" data-tooltip-id="imperative-tooltip" data-tooltip-content="Expresses an order."> Imperative </label><br/>
+                    <label htmlFor="imperativeID" data-tooltip-id="imperative-tooltip" data-tooltip-content="Expresses an order."> Imperative </label>
                     <Tooltip id="imperative-tooltip"/>
 
                     <input type="checkbox" id="conditionalID" name="conditional" onChange = {handleCheckboxChange}/>
-                    <label htmlFor="conditionalID" data-tooltip-id="conditional-tooltip" data-tooltip-content="Expresses a conditional statement. (meaning if/when)"> Conditional (ば) </label>
+                    <label htmlFor="conditionalID" data-tooltip-id="conditional-tooltip" data-tooltip-content="Expresses a conditional statement."> Conditional (ば) </label>
                     <Tooltip id="conditional-tooltip"/>
                 </form> 
                 <button type="submit" disabled={validSettings} onClick={applySettings}> Apply </button>

@@ -61,6 +61,7 @@ function Guess(props){
             <form onSubmit={handleSubmit}>
                 <label>
                     <input 
+                    type="text"
                     name="userGuess"
                     id="userGuessId" 
                     placeholder="Write in Kanji, Hiragana or Romaji" 
