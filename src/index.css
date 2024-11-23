@@ -2,11 +2,13 @@
   font-family: Inter, system-ui, Avenir, Helvetica, Arial, sans-serif;
   line-height: 1.5;
   font-weight: 400;
-
+  
+  font-size: 18px;
+  
   color-scheme: light dark;
-  color: rgba( 0, 0, 0, 0.87);
+  color: rgba(0, 0, 0, 0.87);
   background-color: #ffffff;
-
+  
   font-synthesis: none;
   text-rendering: optimizeLegibility;
   -webkit-font-smoothing: antialiased;
@@ -35,7 +37,7 @@ footer {
 }
 
 h1 {
-  font-size: 3.2em;
+  font-size: 3.2rem;
   line-height: 1.1;
 }
 
@@ -91,15 +93,17 @@ button{
 }
 
 .settings-button {
-  color: rgba(0, 0, 0, 1);
-  background-color: transparent;
-  border-width: 2px;
+  color: rgba( 255, 255, 255  1);
+  background-color: rgba(0, 0, 0  1);
+  font-size: 1rem;
+  padding: 0.4rem;
+  border-width: 2rem;
   border: 2px solid #ccc;
   border-radius: 20px;
 }
 
 .settings-button:hover {
-  background-color: #dddddd ;
+  background-color: #3f3f3f;
   border-color: #ccc;
 }
 
