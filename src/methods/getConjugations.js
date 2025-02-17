@@ -6,7 +6,7 @@ export async function getConjugation(data, setConjugationData) {
     const encodedPos = encodeURIComponent(data.pos);
 
     try {
-        const response = await fetch('http://localhost:8080/api/conjugation', {
+        const response = await fetch('http://localhost:8080/api/v1/conjugation', { // API ENDPOINT
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',

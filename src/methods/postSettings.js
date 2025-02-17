@@ -1,7 +1,7 @@
 
 export async function postSettings(settings) {
     try {
-        const response = await fetch('http://localhost:8080/api/settings', {
+        const response = await fetch('http://localhost:8080/api/v1/settings', { // API ENDPOINT
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',

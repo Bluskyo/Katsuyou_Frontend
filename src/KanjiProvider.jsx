@@ -52,7 +52,7 @@ export function KanjiProvider() {
 
         if (result) {
           // fetched data once settings are posted.
-          const response = await fetch('http://localhost:8080/api/random');
+          const response = await fetch('http://localhost:8080/api/v1/random'); // API ENDPOINT
           const responseJson = await response.json();
 
           setKanjiData(responseJson); // Basic info about word.
